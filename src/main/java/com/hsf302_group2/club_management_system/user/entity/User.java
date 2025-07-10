@@ -1,5 +1,7 @@
 package com.hsf302_group2.club_management_system.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.hsf302_group2.club_management_system.premember.entity.PreMember;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -32,5 +34,9 @@ public class User {
     LocalDateTime updatedAt;
     String status;
     String role;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference("user-preMember")
+    PreMember preMember;
 
 }
