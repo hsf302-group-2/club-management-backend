@@ -8,6 +8,7 @@ import com.hsf302_group2.club_management_system.security.dto.response.Authentica
 import com.hsf302_group2.club_management_system.security.service.AuthenticationService;
 import com.hsf302_group2.club_management_system.user.dto.request.UserCreationRequest;
 import com.hsf302_group2.club_management_system.user.dto.response.UserResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
     AuthenticationService authenticationService;
 
+    @Operation(summary = "Đăng ký tài khoản Pre Member")
     @PostMapping("/signup")
     public ApiResponse<PreMemberResponse> signup(@RequestBody @Valid UserCreationRequest request){
         return ApiResponse.<PreMemberResponse>builder()
@@ -32,6 +34,7 @@ public class AuthenticationController {
                 .build();
     }
 
+    @Operation(summary = "Login")
     @PostMapping("/login")
     public ApiResponse<AuthenticationResponse> login(@RequestBody @Valid AuthenticationRequest request ){
         return ApiResponse.<AuthenticationResponse>builder()
