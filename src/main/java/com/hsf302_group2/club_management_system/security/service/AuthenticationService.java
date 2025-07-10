@@ -3,6 +3,8 @@ package com.hsf302_group2.club_management_system.security.service;
 import com.hsf302_group2.club_management_system.common.exception.AppException;
 import com.hsf302_group2.club_management_system.common.exception.ErrorCode;
 import com.hsf302_group2.club_management_system.common.mapper.UserMapper;
+import com.hsf302_group2.club_management_system.premember.dto.response.PreMemberResponse;
+import com.hsf302_group2.club_management_system.premember.service.PreMemberService;
 import com.hsf302_group2.club_management_system.security.dto.request.AuthenticationRequest;
 import com.hsf302_group2.club_management_system.security.dto.request.IntrospectRequest;
 import com.hsf302_group2.club_management_system.security.dto.request.RefreshRequest;
@@ -45,17 +47,18 @@ public class AuthenticationService {
     UserRepository userRepository;
     PasswordEncoder passwordEncoder;
     UserMapper userMapper;
+    PreMemberService preMemberService;
 
     @NonFinal
     @Value("${jwt.signerKey}")
     protected String SINGER_KEY;
 
-    public UserResponse createUserAccount (UserCreationRequest request, String role){
+    public PreMemberResponse createPreMemberAccount (UserCreationRequest request, String role){
         User user = userRepository.getUserByEmail(request.getEmail());
         if(user != null){
             throw new AppException(ErrorCode.EMAIL_EXISTED);
         }
-        return userService.createUser(request, role);
+        return preMemberService.createPreMember(request, role);
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
