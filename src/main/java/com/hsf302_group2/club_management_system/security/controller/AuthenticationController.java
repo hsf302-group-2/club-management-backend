@@ -2,6 +2,7 @@ package com.hsf302_group2.club_management_system.security.controller;
 
 import com.hsf302_group2.club_management_system.common.dto.ApiResponse;
 import com.hsf302_group2.club_management_system.common.enums.Role;
+import com.hsf302_group2.club_management_system.premember.dto.response.PreMemberResponse;
 import com.hsf302_group2.club_management_system.security.dto.request.AuthenticationRequest;
 import com.hsf302_group2.club_management_system.security.dto.response.AuthenticationResponse;
 import com.hsf302_group2.club_management_system.security.service.AuthenticationService;
@@ -24,10 +25,10 @@ public class AuthenticationController {
     AuthenticationService authenticationService;
 
     @PostMapping("/signup")
-    public ApiResponse<UserResponse> signup(@RequestBody @Valid UserCreationRequest request){
-        return ApiResponse.<UserResponse>builder()
+    public ApiResponse<PreMemberResponse> signup(@RequestBody @Valid UserCreationRequest request){
+        return ApiResponse.<PreMemberResponse>builder()
                 .success(true)
-                .data(authenticationService.createUserAccount(request, Role.USER.name()))
+                .data(authenticationService.createPreMemberAccount(request, Role.PRE_MEMBER.name()))
                 .build();
     }
 
