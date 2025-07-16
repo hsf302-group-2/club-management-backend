@@ -1,6 +1,7 @@
 package com.hsf302_group2.club_management_system.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.hsf302_group2.club_management_system.eventregistration.entity.EventRegistration;
 import com.hsf302_group2.club_management_system.premember.entity.PreMember;
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -39,4 +41,7 @@ public class User {
     @JsonManagedReference("user-preMember")
     PreMember preMember;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference("user-eventRegistrations")
+    List<EventRegistration> eventRegistrations;
 }

@@ -13,10 +13,7 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -30,7 +27,7 @@ public class AuthenticationController {
     public ApiResponse<PreMemberResponse> signup(@RequestBody @Valid UserCreationRequest request){
         return ApiResponse.<PreMemberResponse>builder()
                 .success(true)
-                .data(authenticationService.createPreMemberAccount(request, Role.PRE_MEMBER.name()))
+                .data(authenticationService.createPreMemberAccount(request))
                 .build();
     }
 
@@ -42,4 +39,14 @@ public class AuthenticationController {
                 .data(authenticationService.authenticate(request))
                 .build();
     }
+
+    @Operation(summary = "Xác minh email người dùng sau khi đăng ký")
+    @GetMapping("/verify")
+    public ApiResponse<String> verifyEmail(@RequestParam("token") String token) {
+        return ApiResponse.<String>builder()
+                .success(true)
+                .data(authenticationService.verifyEmailToken(token))
+                .build();
+    }
+
 }
