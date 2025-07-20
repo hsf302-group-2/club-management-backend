@@ -10,12 +10,8 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 @Mapper(componentModel = "spring",
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface MemberFormMapper {
+
     @Mapping(source = "preMember.id", target = "preMemberId")
-    @Mapping(target = "fullName", expression = "java(memberForm.getPreMember().getUser().getFullName())")
-    @Mapping(source = "preMember.gender", target = "gender")
-    @Mapping(source = "preMember.address", target = "address")
-    @Mapping(source = "preMember.phoneNumber", target = "phoneNumber")
-    @Mapping(source = "preMember.dob", target = "dob")
     MemberFormResponse toMemberFormResponse(MemberForm memberForm
     );
     MemberForm toMemberForm(MemberFormCreationRequest memberFormCreationRequest);

@@ -19,10 +19,5 @@ public class MemberFormResponse {
     String status;
     LocalDateTime createdAt;
     String preMemberId;
-    String fullName;
-    String gender;
-    String address;
-    String phoneNumber;
-    LocalDateTime dob;
 
 }

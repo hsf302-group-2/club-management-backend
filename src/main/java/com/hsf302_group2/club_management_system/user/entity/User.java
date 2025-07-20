@@ -1,7 +1,6 @@
 package com.hsf302_group2.club_management_system.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.hsf302_group2.club_management_system.eventregistration.entity.EventRegistration;
 import com.hsf302_group2.club_management_system.premember.entity.PreMember;
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,7 +9,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "user")
