@@ -1,15 +1,15 @@
 package com.hsf302_group2.club_management_system.eventregistration.controller;
 
 import com.hsf302_group2.club_management_system.common.dto.ApiResponse;
+import com.hsf302_group2.club_management_system.eventregistration.dto.response.EventRegistrationResponse;
 import com.hsf302_group2.club_management_system.eventregistration.service.EventRegistrationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/event-registrations")
@@ -27,4 +27,5 @@ public class EventRegistrationController {
                 .message("Đăng ký sự kiện thành công !")
                 .build();
     }
+
 }

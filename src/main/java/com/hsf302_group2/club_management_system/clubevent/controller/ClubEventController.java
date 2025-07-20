@@ -5,6 +5,7 @@ import com.hsf302_group2.club_management_system.clubevent.dto.request.ClubEventU
 import com.hsf302_group2.club_management_system.clubevent.dto.response.ClubEventResponse;
 import com.hsf302_group2.club_management_system.clubevent.service.ClubEventService;
 import com.hsf302_group2.club_management_system.common.dto.ApiResponse;
+import com.hsf302_group2.club_management_system.eventregistration.dto.response.EventRegistrationResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -56,6 +57,14 @@ public class ClubEventController {
         return ApiResponse.<ClubEventResponse>builder()
                 .data(clubEventService.updateClubEvent(clubEventId, request))
                 .success(true)
+                .build();
+    }
+
+    @GetMapping("/me/registered-events")
+    public ApiResponse<List<ClubEventResponse>> getRegisteredEvents() {
+        return ApiResponse.<List<ClubEventResponse>>builder()
+                .success(true)
+                .data(clubEventService.getRegisteredEvents())
                 .build();
     }
 

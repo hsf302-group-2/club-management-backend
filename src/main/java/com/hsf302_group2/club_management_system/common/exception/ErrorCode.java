@@ -22,7 +22,9 @@ public enum ErrorCode {
     USER_NOT_VERIFIED(1014, "Email is not verified", HttpStatus.FORBIDDEN)
     , CLUB_NOT_EXISTED(1015, "Club not existed", HttpStatus.NOT_FOUND),
     CLUB_EVENT_NOT_EXISTED(1016, "Club event not existed", HttpStatus.NOT_FOUND),
-    CLUB_EVENT_ALREADY_REGISTERED(1017, "You have already registered for this club event", HttpStatus.BAD_REQUEST)
+    CLUB_EVENT_ALREADY_REGISTERED(1017, "You have already registered for this club event", HttpStatus.BAD_REQUEST),
+    MAIL_SEND_FAILED(1018, "Failed to send email", HttpStatus.INTERNAL_SERVER_ERROR),
+    NO_REGISTERED_EVENTS(1019, "You have no registered events", HttpStatus.NOT_FOUND)
     ;
 
     ErrorCode(int code, String message, HttpStatus statusCode) {

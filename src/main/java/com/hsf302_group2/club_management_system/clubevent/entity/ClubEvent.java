@@ -57,6 +57,8 @@ public class ClubEvent {
     @JsonManagedReference
     List<EventRegistration> eventRegistrations;
 
+    boolean isRegistered = false;
+
     @Transient
     public int getCurrentParticipants() {
         return eventRegistrations != null ? eventRegistrations.size() : 0;

@@ -41,7 +41,4 @@ public class User {
     @JsonManagedReference("user-preMember")
     PreMember preMember;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference("user-eventRegistrations")
-    List<EventRegistration> eventRegistrations;
 }

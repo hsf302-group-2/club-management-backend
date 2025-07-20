@@ -74,7 +74,7 @@ public class AuthenticationService {
         PreMember savedPreMember = preMemberRepository.save(preMember);
 
         String token = generateEmailVerificationToken(user);
-        String link = "http://localhost:8080/api/auth/verify?token=" + token;
+        String link = "http://localhost:5173/api/auth/verify?token=" + token;
         mailService.sendVerificationEmail(user.getEmail(), link);
         return preMemberMapper.toPreMemberResponse(savedPreMember);
     }
@@ -149,7 +149,6 @@ public class AuthenticationService {
                 .Builder()
                 .subject(user.getEmail())
                 .claim("id", user.getId())
-                .issuer("medcarehiv.com")
                 .issueTime(new Date())
                 .expirationTime(Date.from(Instant.now().plus(1, ChronoUnit.DAYS)))
                 .jwtID(UUID.randomUUID().toString())
@@ -174,7 +173,6 @@ public class AuthenticationService {
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
                 .subject(user.getEmail())
                 .claim("id", user.getId())
-                .issuer("medcarehiv.com")
                 .issueTime(new Date())
                 .expirationTime(new Date(Instant.now().plus(7, ChronoUnit.DAYS).toEpochMilli()))
                 .jwtID(UUID.randomUUID().toString())
@@ -199,7 +197,6 @@ public class AuthenticationService {
                 .subject(user.getEmail())
                 .claim("id", user.getId())
                 .claim("type", "EMAIL_VERIFICATION")
-                .issuer("medcarehiv.com")
                 .issueTime(new Date())
                 .expirationTime(Date.from(Instant.now().plus(1, ChronoUnit.DAYS)))
                 .jwtID(UUID.randomUUID().toString())
