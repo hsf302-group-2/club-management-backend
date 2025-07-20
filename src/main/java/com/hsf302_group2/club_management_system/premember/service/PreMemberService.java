@@ -5,6 +5,7 @@ import com.hsf302_group2.club_management_system.common.exception.AppException;
 import com.hsf302_group2.club_management_system.common.exception.ErrorCode;
 import com.hsf302_group2.club_management_system.common.mapper.PreMemberMapper;
 import com.hsf302_group2.club_management_system.common.mapper.UserMapper;
+import com.hsf302_group2.club_management_system.mail.MailService;
 import com.hsf302_group2.club_management_system.memberform.dto.response.MemberFormResponse;
 import com.hsf302_group2.club_management_system.premember.dto.response.PreMemberResponse;
 import com.hsf302_group2.club_management_system.premember.entity.PreMember;
@@ -29,30 +30,13 @@ import java.util.stream.Collectors;
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE, makeFinal = true)
 @Transactional
 public class PreMemberService {
-    UserMapper userMapper;
-    UserService userService;
-    PasswordEncoder passwordEncoder;
     PreMemberMapper preMemberMapper;
     PreMemberRepository preMemberRepository;
-
-    public PreMemberResponse createPreMember(UserCreationRequest request, String role) {
-        PreMember preMember = new PreMember();
-        User user = userMapper.toUser(request);
-        if (userService.isEmailExisted(user.getEmail())) {
-            throw new RuntimeException(ErrorCode.EMAIL_EXISTED.getMessage());
-        }
-
-        user.setRole(role);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setStatus(UserStatus.ACTIVE.name());
-        preMember.setUser(user);
-        return preMemberMapper.toPreMemberResponse(preMemberRepository.save(preMember));
-    }
 
     public PreMember getPreMemberResponseByToken() {
         var context = SecurityContextHolder.getContext();
         String email = context.getAuthentication().getName();
-        PreMemberResponse preMemberResponse = preMemberRepository.findPreMemberByToken(email)
+        PreMemberResponse preMemberResponse = preMemberRepository.findPreMemberByEmail(email)
                 .orElseThrow(() -> new AppException(ErrorCode.PRE_MEMBER_NOT_EXISTED));
         return preMemberRepository.findById(preMemberResponse.getPreMemberId()).orElseThrow(() -> new AppException(ErrorCode.PRE_MEMBER_NOT_EXISTED));
 

@@ -16,7 +16,15 @@ public enum ErrorCode {
     MEMBER_FORM_EXISTED(1008, "Member form is pending or approving", HttpStatus.BAD_REQUEST),
     MEMBER_FORM_NOT_EXISTED(1009, "Member form not existed", HttpStatus.NOT_FOUND),
     MEMBER_FORM_REVIEWED(1010, "Member form has been reviewed", HttpStatus.BAD_REQUEST),
-
+    INVALID_TOKEN(1011, "Token is invalid or expired", HttpStatus.BAD_REQUEST),
+    INVALID_TOKEN_TYPE(1012, "Token type is not for email verification", HttpStatus.BAD_REQUEST),
+    USER_ALREADY_VERIFIED(1013, "User has already verified email", HttpStatus.BAD_REQUEST),
+    USER_NOT_VERIFIED(1014, "Email is not verified", HttpStatus.FORBIDDEN)
+    , CLUB_NOT_EXISTED(1015, "Club not existed", HttpStatus.NOT_FOUND),
+    CLUB_EVENT_NOT_EXISTED(1016, "Club event not existed", HttpStatus.NOT_FOUND),
+    CLUB_EVENT_ALREADY_REGISTERED(1017, "You have already registered for this club event", HttpStatus.BAD_REQUEST),
+    MAIL_SEND_FAILED(1018, "Failed to send email", HttpStatus.INTERNAL_SERVER_ERROR),
+    NO_REGISTERED_EVENTS(1019, "You have no registered events", HttpStatus.NOT_FOUND)
     ;
 
     ErrorCode(int code, String message, HttpStatus statusCode) {
