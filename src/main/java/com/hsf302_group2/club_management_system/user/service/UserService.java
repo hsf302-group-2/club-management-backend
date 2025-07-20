@@ -69,10 +69,4 @@ public class UserService {
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
     }
 
-    public User getUserResponseByToken(){
-        var context = SecurityContextHolder.getContext();
-        String email = context.getAuthentication().getName();
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
-    }
 }

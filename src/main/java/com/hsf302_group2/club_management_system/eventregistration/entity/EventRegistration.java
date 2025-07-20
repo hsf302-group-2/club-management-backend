@@ -2,6 +2,7 @@ package com.hsf302_group2.club_management_system.eventregistration.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.hsf302_group2.club_management_system.clubevent.entity.ClubEvent;
+import com.hsf302_group2.club_management_system.premember.entity.PreMember;
 import com.hsf302_group2.club_management_system.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ public class EventRegistration {
     ClubEvent clubEvent;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference("user-eventRegistrations")
-    User user;
+    @JoinColumn(name = "premember_id", nullable = false)
+    @JsonBackReference("preMember-eventRegistrations")
+    PreMember preMember;
 }

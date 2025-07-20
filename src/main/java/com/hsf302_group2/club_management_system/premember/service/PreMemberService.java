@@ -36,7 +36,7 @@ public class PreMemberService {
     public PreMember getPreMemberResponseByToken() {
         var context = SecurityContextHolder.getContext();
         String email = context.getAuthentication().getName();
-        PreMemberResponse preMemberResponse = preMemberRepository.findPreMemberByToken(email)
+        PreMemberResponse preMemberResponse = preMemberRepository.findPreMemberByEmail(email)
                 .orElseThrow(() -> new AppException(ErrorCode.PRE_MEMBER_NOT_EXISTED));
         return preMemberRepository.findById(preMemberResponse.getPreMemberId()).orElseThrow(() -> new AppException(ErrorCode.PRE_MEMBER_NOT_EXISTED));
 

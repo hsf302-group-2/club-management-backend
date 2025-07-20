@@ -1,7 +1,9 @@
 package com.hsf302_group2.club_management_system.premember.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hsf302_group2.club_management_system.clubmember.entity.ClubMember;
+import com.hsf302_group2.club_management_system.eventregistration.entity.EventRegistration;
 import com.hsf302_group2.club_management_system.memberform.entity.MemberForm;
 import com.hsf302_group2.club_management_system.user.entity.User;
 import jakarta.persistence.*;
@@ -46,4 +48,8 @@ public class PreMember {
 
     @OneToOne(mappedBy = "preMember", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     ClubMember clubMember;
+
+    @OneToMany(mappedBy = "preMember", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference("preMember-eventRegistrations")
+    List<EventRegistration> eventRegistrations;
 }
