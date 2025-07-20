@@ -19,4 +19,5 @@ public interface ClubMemberMapper {
     @Mapping(source = "preMember.phoneNumber", target = "phoneNumber")
     @Mapping(source = "preMember.dob", target = "dob")
     ClubMemberResponse toClubMemberResponse(ClubMember clubMember);
+    ClubMember toClubMember(ClubMemberResponse clubMemberResponse);
 }

@@ -16,7 +16,7 @@ public interface PreMemberRepository extends JpaRepository<PreMember, String> {
             p.id, u.id, u.email, u.fullName, u.status, p.gender, p.address, p.phoneNumber, p.dob
             )
         FROM PreMember p JOIN p.user u WHERE u.email = :email""")
-    Optional<PreMemberResponse> findPreMemberByEmail(@Param("email") String email);
+    Optional<PreMemberResponse> findPreMemberByToken(@Param("email") String email);
 
 
 
