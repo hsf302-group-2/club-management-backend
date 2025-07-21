@@ -12,6 +12,7 @@ public interface EventRegistrationMapper {
     @Mapping(source = "clubEvent.id", target = "clubEventId")
     @Mapping(target = "preMemberId", expression = "java(eventRegistration.getPreMember().getId())")
     @Mapping(source = "clubEvent.title", target = "title")
+    @Mapping(source = "clubEvent.snippet", target = "snippet")
     @Mapping(source = "clubEvent.description", target = "description")
     @Mapping(source = "clubEvent.location", target = "location")
     @Mapping(source = "clubEvent.speaker", target = "speaker")

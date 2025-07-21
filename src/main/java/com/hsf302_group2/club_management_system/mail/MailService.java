@@ -1,5 +1,6 @@
 package com.hsf302_group2.club_management_system.mail;
 
+import com.hsf302_group2.club_management_system.clubactivity.entity.ClubActivity;
 import com.hsf302_group2.club_management_system.clubevent.entity.ClubEvent;
 import com.hsf302_group2.club_management_system.common.exception.AppException;
 import com.hsf302_group2.club_management_system.common.exception.ErrorCode;
@@ -74,6 +75,64 @@ public class MailService {
                     "</table>" +
                     "<p style='margin-top: 20px;'>Vui lòng đến đúng giờ và liên hệ với chúng tôi nếu có bất kỳ câu hỏi nào.</p>" +
                     "<p>Trân trọng,<br>Đội ngũ tổ chức sự kiện</p>" +
+                    "</body>" +
+                    "</html>";
+
+            helper.setText(htmlContent, true);
+
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            throw new AppException(ErrorCode.MAIL_SEND_FAILED);
+        }
+    }
+
+    public void sendClubActivityRegistrationEmail(String toMail, ClubActivity clubActivity) {
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+            helper.setTo(toMail);
+            helper.setSubject("Xác nhận tham gia hoạt động: " + clubActivity.getTitle());
+
+            String htmlContent = "<html>" +
+                    "<body style='font-family: Arial, sans-serif; line-height: 1.6; color: #333;'>" +
+                    "<h2>Xác nhận tham gia hoạt động câu lạc bộ</h2>" +
+                    "<p>Cảm ơn bạn đã đăng ký tham gia hoạt động của câu lạc bộ chúng tôi. Dưới đây là thông tin chi tiết về hoạt động:</p>" +
+                    "<table style='border-collapse: collapse; width: 100%; max-width: 600px;'>" +
+                    "<tr style='background-color: #f8f8f8;'>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'><strong>Tiêu đề hoạt động</strong></td>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'>" + clubActivity.getTitle() + "</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'><strong>Mô tả</strong></td>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'>" + clubActivity.getDescription() + "</td>" +
+                    "</tr>" +
+                    "<tr style='background-color: #f8f8f8;'>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'><strong>Địa điểm</strong></td>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'>" + clubActivity.getLocation() + "</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'><strong>Loại hoạt động</strong></td>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'>" + clubActivity.getType() + "</td>" +
+                    "</tr>" +
+                    "<tr style='background-color: #f8f8f8;'>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'><strong>Thời gian bắt đầu</strong></td>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'>" +
+                    clubActivity.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + "</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'><strong>Thời gian kết thúc</strong></td>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'>" +
+                    clubActivity.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + "</td>" +
+                    "</tr>" +
+                    "<tr style='background-color: #f8f8f8;'>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'><strong>Hạn đăng ký</strong></td>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'>" +
+                    clubActivity.getRegistrationDeadline().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + "</td>" +
+                    "</tr>" +
+                    "</table>" +
+                    "<p style='margin-top: 20px;'>Vui lòng đến đúng giờ và liên hệ với chúng tôi nếu có bất kỳ câu hỏi nào.</p>" +
+                    "<p>Trân trọng,<br>Đội ngũ câu lạc bộ</p>" +
                     "</body>" +
                     "</html>";
 

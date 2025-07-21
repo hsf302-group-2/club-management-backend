@@ -13,6 +13,7 @@ import java.time.LocalTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ClubEventUpdateRequest {
     String title;
+    String snippet;
     String description;
     String location;
     String speaker;

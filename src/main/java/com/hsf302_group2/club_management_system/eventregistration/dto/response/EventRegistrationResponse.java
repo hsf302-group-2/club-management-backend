@@ -17,6 +17,7 @@ public class EventRegistrationResponse {
     int clubEventId;
     String preMemberId;
     String title;
+    String snippet;
     String description;
     String location;
     String speaker;
