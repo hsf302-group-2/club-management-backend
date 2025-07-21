@@ -2,6 +2,7 @@ package com.hsf302_group2.club_management_system.clubevent.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hsf302_group2.club_management_system.eventregistration.entity.EventRegistration;
+import com.hsf302_group2.club_management_system.feedbackform.entity.FeedbackForm;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -57,7 +58,10 @@ public class ClubEvent {
     @JsonManagedReference
     List<EventRegistration> eventRegistrations;
 
-    boolean isRegistered = false;
+    @OneToMany(mappedBy = "clubEvent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<FeedbackForm> feedbackForms;
+
 
     @Transient
     public int getCurrentParticipants() {
