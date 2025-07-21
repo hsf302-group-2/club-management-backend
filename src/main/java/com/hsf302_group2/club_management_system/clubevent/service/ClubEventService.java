@@ -83,6 +83,4 @@ public class ClubEventService {
                 .collect(Collectors.toList());
     }
 
-
-
 }

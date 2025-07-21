@@ -14,6 +14,7 @@ import java.time.LocalTime;
 public class ClubEventResponse {
     int clubEventId;
     String title;
+    String snippet;
     String description;
     String location;
     String speaker;

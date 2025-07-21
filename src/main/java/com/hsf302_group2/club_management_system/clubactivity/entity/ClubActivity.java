@@ -1,8 +1,10 @@
-package com.hsf302_group2.club_management_system.clubevent.entity;
+package com.hsf302_group2.club_management_system.clubactivity.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.hsf302_group2.club_management_system.activityregistration.entity.ActivityRegistration;
 import com.hsf302_group2.club_management_system.eventregistration.entity.EventRegistration;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,15 +14,15 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@FieldDefaults(level = lombok.AccessLevel.PRIVATE)
-public class ClubEvent {
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class ClubActivity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
@@ -29,25 +31,22 @@ public class ClubEvent {
     String title;
 
     @Column(nullable = false)
-    String snippet;
-
-    @Column(nullable = false)
     String description;
 
     @Column(nullable = false)
     String location;
 
     @Column(nullable = false)
-    String speaker;
+    String type;
 
     @Column(nullable = false)
-    LocalDate eventDate;
+    LocalDateTime startDate;
 
     @Column(nullable = false)
-    LocalTime startTime;
+    LocalDateTime endDate;
 
     @Column(nullable = false)
-    LocalTime endTime;
+    LocalDateTime registrationDeadline;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -56,17 +55,12 @@ public class ClubEvent {
     @UpdateTimestamp
     LocalDateTime updatedAt;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "clubEvent")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "clubActivity")
     @JsonManagedReference
-    List<EventRegistration> eventRegistrations;
-
-//    @OneToMany(mappedBy = "clubEvent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-//    @JsonManagedReference
-//    private List<FeedbackForm> feedbackForms;
-
+    List<ActivityRegistration> activityRegistrations;
 
     @Transient
     public int getCurrentParticipants() {
-        return eventRegistrations != null ? eventRegistrations.size() : 0;
+        return activityRegistrations != null ? activityRegistrations.size() : 0;
     }
 }

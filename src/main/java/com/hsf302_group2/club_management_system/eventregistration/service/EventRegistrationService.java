@@ -32,7 +32,6 @@ public class EventRegistrationService {
     MailService mailService;
     PreMemberService preMemberService;
     ClubEventRepository clubEventRepository;
-    EventRegistrationMapper eventRegistrationMapper;
 
     @PreAuthorize("hasRole('PRE_MEMBER')")
     public void registerForEvent(int eventClubId) {

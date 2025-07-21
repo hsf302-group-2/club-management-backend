@@ -24,7 +24,15 @@ public enum ErrorCode {
     CLUB_EVENT_NOT_EXISTED(1016, "Club event not existed", HttpStatus.NOT_FOUND),
     CLUB_EVENT_ALREADY_REGISTERED(1017, "You have already registered for this club event", HttpStatus.BAD_REQUEST),
     MAIL_SEND_FAILED(1018, "Failed to send email", HttpStatus.INTERNAL_SERVER_ERROR),
-    NO_REGISTERED_EVENTS(1019, "You have no registered events", HttpStatus.NOT_FOUND)
+    NO_REGISTERED_EVENTS(1019, "You have no registered events", HttpStatus.NOT_FOUND),
+    CLUB_ACTIVITY_NOT_EXISTED(1020, "Club activity not existed", HttpStatus.NOT_FOUND),
+    CLUB_ACTIVITY_ALREADY_REGISTERED(1021, "You have already registered for this club activity", HttpStatus.BAD_REQUEST),
+    REGISTRATION_TIME_PASSED(1022, "The registration time has passed", HttpStatus.BAD_REQUEST),
+    NO_REGISTERED_ACTIVITIES(1023, "You have no registered activities", HttpStatus.NOT_FOUND),
+
+
+
+
     ;
 
     ErrorCode(int code, String message, HttpStatus statusCode) {
