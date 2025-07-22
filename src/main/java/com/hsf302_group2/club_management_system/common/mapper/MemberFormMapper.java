@@ -16,7 +16,6 @@ public interface MemberFormMapper {
     @Mapping(source = "preMember.address", target = "address")
     @Mapping(source = "preMember.phoneNumber", target = "phoneNumber")
     @Mapping(source = "preMember.dob", target = "dob")
-    MemberFormResponse toMemberFormResponse(MemberForm memberForm
-    );
+    MemberFormResponse toMemberFormResponse(MemberForm memberForm);
     MemberForm toMemberForm(MemberFormCreationRequest memberFormCreationRequest);
 }

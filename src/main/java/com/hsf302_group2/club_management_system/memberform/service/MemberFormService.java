@@ -7,6 +7,7 @@ import com.hsf302_group2.club_management_system.common.enums.Role;
 import com.hsf302_group2.club_management_system.common.exception.AppException;
 import com.hsf302_group2.club_management_system.common.exception.ErrorCode;
 import com.hsf302_group2.club_management_system.common.mapper.MemberFormMapper;
+import com.hsf302_group2.club_management_system.mail.MailService;
 import com.hsf302_group2.club_management_system.memberform.dto.request.MemberFormCreationRequest;
 import com.hsf302_group2.club_management_system.memberform.dto.request.MemberFormReviewRequest;
 import com.hsf302_group2.club_management_system.memberform.dto.response.MemberFormResponse;
@@ -37,6 +38,7 @@ public class MemberFormService {
     PreMemberService preMemberService;
     ClubMemberRepository clubMemberRepository;
     UserRepository userRepository;
+    MailService mailService;
 
     public MemberFormResponse createMemberForm(MemberFormCreationRequest request){
         MemberForm memberForm = memberFormMapper.toMemberForm(request);
@@ -89,6 +91,8 @@ public class MemberFormService {
             clubMember.setPreMember(preMember);
             clubMember.setJoinedAt(LocalDateTime.now());
             clubMemberRepository.save(clubMember);
+            mailService.sendWelcomeClubMemberEmail(clubMember.getPreMember().getUser().getEmail(), clubMember);
+
         }
 
         return memberFormMapper.toMemberFormResponse(memberFormRepository.save(memberForm));

@@ -2,6 +2,7 @@ package com.hsf302_group2.club_management_system.mail;
 
 import com.hsf302_group2.club_management_system.clubactivity.entity.ClubActivity;
 import com.hsf302_group2.club_management_system.clubevent.entity.ClubEvent;
+import com.hsf302_group2.club_management_system.clubmember.entity.ClubMember;
 import com.hsf302_group2.club_management_system.common.exception.AppException;
 import com.hsf302_group2.club_management_system.common.exception.ErrorCode;
 import jakarta.mail.MessagingException;
@@ -138,6 +139,49 @@ public class MailService {
 
             helper.setText(htmlContent, true);
 
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            throw new AppException(ErrorCode.MAIL_SEND_FAILED);
+        }
+    }
+
+    public void sendWelcomeClubMemberEmail(String toMail, ClubMember clubMember) {
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+            helper.setTo(toMail);
+            helper.setSubject("Chào mừng bạn trở thành thành viên Spring Tech Club!");
+
+            String htmlContent = "<html>" +
+                    "<body style='font-family: Arial, sans-serif; line-height: 1.6; color: #333;'>" +
+                    "<h2>Chào mừng đến với Spring Tech Club!</h2>" +
+                    "<p>Chúng tôi rất vui mừng chào đón bạn trở thành thành viên chính thức của <strong>Spring Tech Club</strong>! " +
+                    "Câu lạc bộ của chúng tôi là nơi kết nối những người đam mê công nghệ, đặc biệt là Spring Framework, " +
+                    "và chúng tôi rất mong chờ được đồng hành cùng bạn trong hành trình khám phá và phát triển.</p>" +
+                    "<table style='border-collapse: collapse; width: 100%; max-width: 600px;'>" +
+                    "<tr style='background-color: #f8f8f8;'>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'><strong>Họ và tên</strong></td>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'>" + clubMember.getPreMember().getUser().getFullName() + "</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'><strong>Email</strong></td>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'>" + clubMember.getPreMember().getUser().getEmail() + "</td>" +
+                    "</tr>" +
+                    "<tr style='background-color: #f8f8f8;'>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'><strong>Ngày tham gia</strong></td>" +
+                    "<td style='padding: 10px; border: 1px solid #ddd;'>" +
+                    clubMember.getJoinedAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "</td>" +
+                    "</tr>" +
+                    "</table>" +
+                    "<p style='margin-top: 20px;'>Hãy tham gia các hoạt động sắp tới của chúng tôi để kết nối, học hỏi và chia sẻ kinh nghiệm. " +
+                    "Nếu bạn có bất kỳ câu hỏi nào, đừng ngần ngại liên hệ với đội ngũ quản lý câu lạc bộ.</p>" +
+                    "<p>Chào mừng bạn một lần nữa và hy vọng bạn sẽ có những trải nghiệm tuyệt vời cùng Spring Tech Club!</p>" +
+                    "<p>Trân trọng,<br>Đội ngũ Spring Tech Club</p>" +
+                    "</body>" +
+                    "</html>";
+
+            helper.setText(htmlContent, true);
             mailSender.send(message);
         } catch (MessagingException e) {
             throw new AppException(ErrorCode.MAIL_SEND_FAILED);

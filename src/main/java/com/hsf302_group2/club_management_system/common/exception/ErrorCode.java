@@ -29,6 +29,10 @@ public enum ErrorCode {
     CLUB_ACTIVITY_ALREADY_REGISTERED(1021, "You have already registered for this club activity", HttpStatus.BAD_REQUEST),
     REGISTRATION_TIME_PASSED(1022, "The registration time has passed", HttpStatus.BAD_REQUEST),
     NO_REGISTERED_ACTIVITIES(1023, "You have no registered activities", HttpStatus.NOT_FOUND),
+    PASSWORD_NOT_MATCHES(1024,"Password not matches", HttpStatus.BAD_REQUEST),
+    PASSWORD_DUPLICATED(1025, "New password must not be the same as the old password", HttpStatus.BAD_REQUEST),
+
+
 
 
 
