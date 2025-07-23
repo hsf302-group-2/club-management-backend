@@ -49,6 +49,9 @@ public class ClubEvent {
     @Column(nullable = false)
     LocalTime endTime;
 
+    @Column(nullable = false)
+    LocalDateTime registrationDeadline;
+
     @CreationTimestamp
     @Column(updatable = false)
     LocalDateTime createdAt;

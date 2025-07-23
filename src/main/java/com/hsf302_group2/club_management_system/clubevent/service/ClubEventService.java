@@ -69,7 +69,7 @@ public class ClubEventService {
 
     }
 
-    @PreAuthorize("hasRole('PRE_MEMBER')")
+//    @PreAuthorize("hasRole('PRE_MEMBER')")
     public List<ClubEventResponse> getRegisteredEvents(){
         PreMember preMember = preMemberService.getPreMemberResponseByToken();
         List<ClubEvent> events = clubEventRepository.findByUserRegistrations(preMember.getId());

@@ -33,7 +33,7 @@ public class EventRegistrationService {
     PreMemberService preMemberService;
     ClubEventRepository clubEventRepository;
 
-    @PreAuthorize("hasRole('PRE_MEMBER')")
+//    @PreAuthorize("hasRole('PRE_MEMBER')")
     public void registerForEvent(int eventClubId) {
         PreMember preMember = preMemberService.getPreMemberResponseByToken();
         ClubEvent clubEvent = clubEventRepository.findById(eventClubId)
@@ -45,9 +45,13 @@ public class EventRegistrationService {
         }
 
         EventRegistration eventRegistration = new EventRegistration();
+        eventRegistration.setRegistrationTime(LocalDateTime.now());
+        if (eventRegistration.getRegistrationTime().isAfter(clubEvent.getRegistrationDeadline())){
+            throw new AppException(ErrorCode.REGISTRATION_TIME_PASSED);
+        }
+
         eventRegistration.setClubEvent(clubEvent);
         eventRegistration.setPreMember(preMember);
-        eventRegistration.setRegistrationTime(LocalDateTime.now());
 
         eventRegistrationRepository.save(eventRegistration);
         mailService.sendRegistrationClubEventEmail(preMember.getUser().getEmail(),clubEvent);
