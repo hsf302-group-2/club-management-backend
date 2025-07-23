@@ -63,5 +63,12 @@ public class ClubActivityService {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    public void deleteClubActivity(int clubActivityId) {
+        ClubActivity clubActivity = clubActivityRepository.findById(clubActivityId)
+                .orElseThrow(() -> new AppException(ErrorCode.CLUB_ACTIVITY_NOT_EXISTED));
+        clubActivityRepository.delete(clubActivity);
+    }
+
 
 }

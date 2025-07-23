@@ -31,6 +31,12 @@ public enum ErrorCode {
     NO_REGISTERED_ACTIVITIES(1023, "You have no registered activities", HttpStatus.NOT_FOUND),
     PASSWORD_NOT_MATCHES(1024,"Password not matches", HttpStatus.BAD_REQUEST),
     PASSWORD_DUPLICATED(1025, "New password must not be the same as the old password", HttpStatus.BAD_REQUEST),
+    FEEDBACK_ALREADY_SUBMITTED(1026, "You have already submitted feedback", HttpStatus.BAD_REQUEST),
+    EVENT_NOT_ENDED_YET(1027, "You cannot submit feedback before the event ends", HttpStatus.BAD_REQUEST),
+    ACTIVITY_NOT_ENDED_YET(1027, "You cannot submit feedback before the activity ends", HttpStatus.BAD_REQUEST),
+    CANNOT_FEEDBACK_WHEN_ABSENT(1028, "Cannot give feedback when absent", HttpStatus.BAD_REQUEST),
+
+
 
 
 
