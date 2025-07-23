@@ -33,7 +33,7 @@ public class EventRegistrationService {
     PreMemberService preMemberService;
     ClubEventRepository clubEventRepository;
 
-//    @PreAuthorize("hasRole('PRE_MEMBER')")
+    @PreAuthorize("hasRole('PRE_MEMBER')")
     public void registerForEvent(int eventClubId) {
         PreMember preMember = preMemberService.getPreMemberResponseByToken();
         ClubEvent clubEvent = clubEventRepository.findById(eventClubId)
