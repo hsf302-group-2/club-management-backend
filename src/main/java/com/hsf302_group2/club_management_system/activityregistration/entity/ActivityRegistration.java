@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.hsf302_group2.club_management_system.clubactivity.entity.ClubActivity;
 import com.hsf302_group2.club_management_system.clubevent.entity.ClubEvent;
 import com.hsf302_group2.club_management_system.clubmember.entity.ClubMember;
+import com.hsf302_group2.club_management_system.common.enums.RegistrationStatus;
 import com.hsf302_group2.club_management_system.premember.entity.PreMember;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,9 @@ public class ActivityRegistration {
     int id;
 
     LocalDateTime registrationTime;
+
+    @Enumerated(EnumType.STRING)
+    RegistrationStatus status = RegistrationStatus.CONFIRMED;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "club_activity_id", nullable = false)

@@ -63,17 +63,5 @@ public class ClubActivityService {
 
     }
 
-    @PreAuthorize("hasRole('CLUB_MEMBER')")
-    public List<ClubActivityResponse> getRegisteredActivities(){
-        PreMember preMember = preMemberService.getPreMemberResponseByToken();
-        List<ClubActivity> activities = clubActivityRepository.findByUserActivityRegistrations(preMember.getClubMember().getId());
 
-        if (activities.isEmpty()){
-            throw new AppException(ErrorCode.NO_REGISTERED_ACTIVITIES);
-        }
-
-        return activities.stream()
-                .map(clubActivityMapper::toClubActivityResponse)
-                .collect(Collectors.toList());
-    }
 }

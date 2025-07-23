@@ -11,6 +11,5 @@ import java.util.List;
 
 @Repository
 public interface ClubActivityRepository extends JpaRepository<ClubActivity, Integer> {
-    @Query("SELECT a FROM ClubActivity a JOIN a.activityRegistrations ar WHERE ar.clubMember.id = :clubMemberId")
-    List<ClubActivity> findByUserActivityRegistrations(@Param("clubMemberId") String clubMemberId);
+
 }
