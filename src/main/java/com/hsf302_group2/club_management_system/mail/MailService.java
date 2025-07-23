@@ -126,11 +126,6 @@ public class MailService {
                     "<td style='padding: 10px; border: 1px solid #ddd;'>" +
                     clubActivity.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + "</td>" +
                     "</tr>" +
-                    "<tr style='background-color: #f8f8f8;'>" +
-                    "<td style='padding: 10px; border: 1px solid #ddd;'><strong>Hạn đăng ký</strong></td>" +
-                    "<td style='padding: 10px; border: 1px solid #ddd;'>" +
-                    clubActivity.getRegistrationDeadline().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + "</td>" +
-                    "</tr>" +
                     "</table>" +
                     "<p style='margin-top: 20px;'>Vui lòng đến đúng giờ và liên hệ với chúng tôi nếu có bất kỳ câu hỏi nào.</p>" +
                     "<p>Trân trọng,<br>Đội ngũ câu lạc bộ</p>" +
