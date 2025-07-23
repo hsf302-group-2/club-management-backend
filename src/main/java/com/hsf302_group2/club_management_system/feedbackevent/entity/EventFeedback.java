@@ -1,4 +1,4 @@
-package com.hsf302_group2.club_management_system.feedbackform.entity;
+package com.hsf302_group2.club_management_system.feedbackevent.entity;
 
 import com.hsf302_group2.club_management_system.activityregistration.entity.ActivityRegistration;
 import com.hsf302_group2.club_management_system.eventregistration.entity.EventRegistration;
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE)
-public class FeedbackForm {
+public class EventFeedback {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,13 +31,11 @@ public class FeedbackForm {
     @NotBlank(message = "Please leave some words !")
     String content;
 
+    @Column(nullable = false)
     LocalDateTime submittedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_registration_id", nullable = false)
     EventRegistration eventRegistration;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "activity_registration_id", nullable = false)
-    ActivityRegistration activityRegistration;
 }

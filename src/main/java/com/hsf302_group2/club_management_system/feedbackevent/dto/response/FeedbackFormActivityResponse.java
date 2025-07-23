@@ -1,4 +1,4 @@
-package com.hsf302_group2.club_management_system.feedbackform.dto.response;
+package com.hsf302_group2.club_management_system.feedbackevent.dto.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

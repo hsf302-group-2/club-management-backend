@@ -62,6 +62,16 @@ public class ClubActivityController {
                 .build();
     }
 
+    @Operation(summary = "Xóa hoạt động câu lạc bộ")
+    @DeleteMapping("/{clubActivityId}")
+    public ApiResponse<Void> deleteClubActivity (@PathVariable int clubActivityId){
+        clubActivityService.deleteClubActivity(clubActivityId);
+        return ApiResponse.<Void>builder()
+                .success(true)
+                .message("Xóa hoạt động thành công !")
+                .build();
+    }
+
 
 
 

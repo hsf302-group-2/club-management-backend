@@ -83,4 +83,10 @@ public class ClubEventService {
                 .collect(Collectors.toList());
     }
 
+    public void deleteClubEvent(int clubEventId){
+        ClubEvent clubEvent = clubEventRepository.findById(clubEventId)
+                .orElseThrow(() -> new AppException(ErrorCode.CLUB_EVENT_NOT_EXISTED));
+        clubEventRepository.delete(clubEvent);
+    }
+
 }

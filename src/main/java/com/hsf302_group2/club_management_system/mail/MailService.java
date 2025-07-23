@@ -32,6 +32,7 @@ public class MailService {
 
     }
 
+
     public void sendRegistrationClubEventEmail(String toMail, ClubEvent clubEvent) {
         try {
             MimeMessage message = mailSender.createMimeMessage();

@@ -68,5 +68,15 @@ public class ClubEventController {
                 .build();
     }
 
+    @Operation(summary = "Xóa sự kiện câu lạc bộ")
+    @DeleteMapping("/{clubEventId}")
+    public ApiResponse<Void> deleteClubEvent (@PathVariable int clubEventId){
+        clubEventService.deleteClubEvent(clubEventId);
+        return ApiResponse.<Void>builder()
+                .success(true)
+                .message("Xóa sự kiện thành công !")
+                .build();
+    }
+
 
 }

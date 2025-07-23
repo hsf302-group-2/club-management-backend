@@ -1,4 +1,4 @@
-package com.hsf302_group2.club_management_system.feedbackform.dto.response;
+package com.hsf302_group2.club_management_system.feedbackevent.dto.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -8,7 +8,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class FeedbackFormEventResponse {
+public class EventFeedbackResponse {
     int id;
     int clubEventId;
     String preMemberId;
