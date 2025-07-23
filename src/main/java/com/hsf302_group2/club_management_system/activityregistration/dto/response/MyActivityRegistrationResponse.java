@@ -11,16 +11,15 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ActivityRegistrationResponse {
+public class MyActivityRegistrationResponse {
     int id;
     int clubActivityId;
     String clubMemberId;
-    String fullName;
-    String gender;
-    LocalDateTime registrationTime;
+    String title;
+    String description;
+    String location;
+    String type;
+    LocalDateTime startDate;
+    LocalDateTime endDate;
     RegistrationStatus status;
-
-
-
-
 }

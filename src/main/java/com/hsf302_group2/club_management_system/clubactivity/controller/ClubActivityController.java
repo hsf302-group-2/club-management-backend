@@ -62,14 +62,7 @@ public class ClubActivityController {
                 .build();
     }
 
-    @Operation(summary = "Lấy danh sách hoạt động clb đã đăng ký")
-    @GetMapping("/me/registered-activities")
-    public ApiResponse<List<ClubActivityResponse>> getRegisteredActivities() {
-        return ApiResponse.<List<ClubActivityResponse>>builder()
-                .success(true)
-                .data(clubActivityService.getRegisteredActivities())
-                .build();
-    }
+
 
 
 }
