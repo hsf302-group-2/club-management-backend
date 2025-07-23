@@ -8,6 +8,10 @@ import com.hsf302_group2.club_management_system.activityregistration.repository.
 import com.hsf302_group2.club_management_system.clubactivity.dto.response.ClubActivityResponse;
 import com.hsf302_group2.club_management_system.clubactivity.entity.ClubActivity;
 import com.hsf302_group2.club_management_system.clubactivity.repository.ClubActivityRepository;
+import com.hsf302_group2.club_management_system.clubmember.entity.ClubMember;
+import com.hsf302_group2.club_management_system.clubpoint.entity.ClubPoint;
+import com.hsf302_group2.club_management_system.clubpoint.repository.ClubPointRepository;
+import com.hsf302_group2.club_management_system.common.enums.RegistrationStatus;
 import com.hsf302_group2.club_management_system.common.exception.AppException;
 import com.hsf302_group2.club_management_system.common.exception.ErrorCode;
 import com.hsf302_group2.club_management_system.common.mapper.ActivityRegistrationMapper;
@@ -35,6 +39,7 @@ public class ActivityRegistrationService {
     PreMemberService preMemberService;
     ActivityRegistrationRepository activityRegistrationRepository;
     ActivityRegistrationMapper activityRegistrationMapper;
+    ClubPointRepository clubPointRepository;
 
     @PreAuthorize("hasRole('CLUB_MEMBER')")
     public void activityRegistration(int clubActivityId) {
@@ -67,6 +72,14 @@ public class ActivityRegistrationService {
 
         registration.setStatus(request.getStatus());
         activityRegistrationRepository.save(registration);
+
+        ClubMember clubMember = registration.getClubMember();
+        if (request.getStatus() == RegistrationStatus.ATTENDED){
+            clubPointRepository.save(new ClubPoint(clubMember, 10, "Đã tham gia hoạt động CLB", LocalDateTime.now()));
+        }
+        else if (request.getStatus() == RegistrationStatus.ABSENT){
+            clubPointRepository.save(new ClubPoint(clubMember, -15, "Vắng mặt hoạt động CLB", LocalDateTime.now()));
+        }
     }
 
     @PreAuthorize("hasRole('ADMIN')")
