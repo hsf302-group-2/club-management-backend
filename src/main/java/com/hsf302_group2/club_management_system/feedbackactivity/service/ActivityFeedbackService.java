@@ -2,6 +2,9 @@ package com.hsf302_group2.club_management_system.feedbackactivity.service;
 
 import com.hsf302_group2.club_management_system.activityregistration.entity.ActivityRegistration;
 import com.hsf302_group2.club_management_system.activityregistration.repository.ActivityRegistrationRepository;
+import com.hsf302_group2.club_management_system.clubmember.entity.ClubMember;
+import com.hsf302_group2.club_management_system.clubpoint.entity.ClubPoint;
+import com.hsf302_group2.club_management_system.clubpoint.repository.ClubPointRepository;
 import com.hsf302_group2.club_management_system.common.enums.RegistrationStatus;
 import com.hsf302_group2.club_management_system.common.exception.AppException;
 import com.hsf302_group2.club_management_system.common.exception.ErrorCode;
@@ -30,6 +33,7 @@ public class ActivityFeedbackService {
     ActivityFeedbackRepository activityFeedbackRepository;
     ActivityFeedbackMapper activityFeedbackMapper;
     ActivityRegistrationRepository activityRegistrationRepository;
+    ClubPointRepository clubPointRepository;
 
     //    @PreAuthorize("hasRole('CLUB_MEMBER')")
     public ActivityFeedbackResponse submitActivityFeedback(ActivityFeedbackCreationRequest request, int activityRegistrationId){
@@ -52,7 +56,13 @@ public class ActivityFeedbackService {
         ActivityFeedback activityFeedback = activityFeedbackMapper.toActivityFeedback(request);
         activityFeedback.setActivityRegistration(activityRegistration);
         activityFeedback.setSubmittedAt(LocalDateTime.now());
-        return activityFeedbackMapper.toActivityFeedbackResponse(activityFeedbackRepository.save(activityFeedback));
+
+        ActivityFeedback savedFeedback = activityFeedbackRepository.save(activityFeedback);
+
+        ClubMember clubMember = activityRegistration.getClubMember();
+        clubPointRepository.save(new ClubPoint(clubMember, 15, "Đã feedback cho hoạt động CLB", LocalDateTime.now()));
+
+        return activityFeedbackMapper.toActivityFeedbackResponse(savedFeedback);
 
     }
 

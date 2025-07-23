@@ -35,6 +35,8 @@ public enum ErrorCode {
     EVENT_NOT_ENDED_YET(1027, "You cannot submit feedback before the event ends", HttpStatus.BAD_REQUEST),
     ACTIVITY_NOT_ENDED_YET(1027, "You cannot submit feedback before the activity ends", HttpStatus.BAD_REQUEST),
     CANNOT_FEEDBACK_WHEN_ABSENT(1028, "Cannot give feedback when absent", HttpStatus.BAD_REQUEST),
+    CLUB_MEMBER_NOT_EXISTED(1029, "Club member not existed", HttpStatus.NOT_FOUND),
+
 
 
 
