@@ -1,6 +1,7 @@
 package com.hsf302_group2.club_management_system.user.controller;
 
 import com.hsf302_group2.club_management_system.common.dto.ApiResponse;
+import com.hsf302_group2.club_management_system.user.dto.response.UserProfileResponse;
 import com.hsf302_group2.club_management_system.user.dto.response.UserResponse;
 import com.hsf302_group2.club_management_system.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,6 +29,15 @@ public class UserController {
         return ApiResponse.<List<UserResponse>>builder()
                 .success(true)
                 .data(userService.getAllUser())
+                .build();
+    }
+
+    @GetMapping("/myInfo")
+    @Operation(summary = "Xem thông tin cá nhân  bằng token")
+    public ApiResponse<UserProfileResponse> getMyInfo() {
+        return ApiResponse.<UserProfileResponse>builder()
+                .success(true)
+                .data(userService.getUserProfileByToken())
                 .build();
     }
 }

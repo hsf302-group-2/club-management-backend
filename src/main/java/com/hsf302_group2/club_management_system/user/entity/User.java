@@ -37,7 +37,7 @@ public class User {
     String status;
     String role;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference("user-preMember")
     PreMember preMember;
 
