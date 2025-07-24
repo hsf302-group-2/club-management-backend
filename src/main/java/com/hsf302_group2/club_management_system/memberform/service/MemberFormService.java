@@ -95,6 +95,12 @@ public class MemberFormService {
 
         }
 
+        if (request.getStatus() ==  FormStatus.REJECTED) {
+            PreMember preMember = memberForm.getPreMember();
+            User user = preMember.getUser();
+            mailService.sendRejectionClubMemberEmail(user.getEmail(), preMember);
+        }
+
         return memberFormMapper.toMemberFormResponse(memberFormRepository.save(memberForm));
     }
 
