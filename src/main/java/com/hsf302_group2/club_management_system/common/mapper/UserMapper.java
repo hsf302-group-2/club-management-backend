@@ -1,6 +1,7 @@
 package com.hsf302_group2.club_management_system.common.mapper;
 
 import com.hsf302_group2.club_management_system.user.dto.request.UserCreationRequest;
+import com.hsf302_group2.club_management_system.user.dto.response.UserProfileResponse;
 import com.hsf302_group2.club_management_system.user.dto.response.UserResponse;
 import com.hsf302_group2.club_management_system.user.entity.User;
 import org.mapstruct.Mapper;
@@ -16,4 +17,5 @@ public interface UserMapper {
 
     @Mapping(source = "id", target = "id")
     UserResponse toUserResponse(User user);
+
 }

@@ -5,7 +5,10 @@ import com.hsf302_group2.club_management_system.common.enums.UserStatus;
 import com.hsf302_group2.club_management_system.common.exception.AppException;
 import com.hsf302_group2.club_management_system.common.exception.ErrorCode;
 import com.hsf302_group2.club_management_system.common.mapper.UserMapper;
+import com.hsf302_group2.club_management_system.premember.dto.response.PreMemberResponse;
+import com.hsf302_group2.club_management_system.premember.entity.PreMember;
 import com.hsf302_group2.club_management_system.user.dto.request.UserCreationRequest;
+import com.hsf302_group2.club_management_system.user.dto.response.UserProfileResponse;
 import com.hsf302_group2.club_management_system.user.dto.response.UserResponse;
 import com.hsf302_group2.club_management_system.user.entity.User;
 import com.hsf302_group2.club_management_system.user.repository.UserRepository;
@@ -66,6 +69,13 @@ public class UserService {
 
     public User findUserByEmail(String email){
         return userRepository.findByEmail(email)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+    }
+
+    public UserProfileResponse getUserProfileByToken(){
+        var context = SecurityContextHolder.getContext();
+        String email = context.getAuthentication().getName();
+        return userRepository.findUserByEmail(email)
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
     }
 
