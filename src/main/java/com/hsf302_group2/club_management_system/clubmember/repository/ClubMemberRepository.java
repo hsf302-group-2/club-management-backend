@@ -1,5 +1,6 @@
 package com.hsf302_group2.club_management_system.clubmember.repository;
 
+import com.hsf302_group2.club_management_system.clubmember.dto.response.ClubMemberResponse;
 import com.hsf302_group2.club_management_system.clubmember.entity.ClubMember;
 import com.hsf302_group2.club_management_system.premember.dto.response.PreMemberResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,11 +14,11 @@ import java.util.Optional;
 @Repository
 public interface ClubMemberRepository extends JpaRepository<ClubMember, String> {
     @Query("""
-        SELECT new com.hsf302_group2.club_management_system.premember.dto.response.PreMemberResponse (
-            p.id, u.id, u.email, u.fullName, u.status, p.gender, p.address, p.phoneNumber, p.dob
+        SELECT new com.hsf302_group2.club_management_system.clubmember.dto.response.ClubMemberResponse (
+            cm.id, u.id, u.email, u.fullName, u.status, pm.gender, pm.address, pm.phoneNumber, pm.dob
             )
-        FROM PreMember p JOIN p.user u WHERE u.email = :email""")
-    Optional<PreMemberResponse> findPreMemberByEmail(@Param("email") String email);
+        FROM ClubMember cm JOIN cm.preMember pm JOIN pm.user u WHERE u.email = :email""")
+    Optional<ClubMemberResponse> findClubMemberByEmail(@Param("email") String email);
 
 
 }
