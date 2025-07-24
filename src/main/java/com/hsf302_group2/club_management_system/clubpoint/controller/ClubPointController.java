@@ -44,20 +44,20 @@ public class ClubPointController {
     }
 
     @Operation(summary = "Lấy điểm của tôi")
-    @GetMapping("/me/point/{clubMemberId}")
-    public ApiResponse<ClubPointTotalResponse> getMyTotalPoint(@PathVariable String clubMemberId) {
+    @GetMapping("/me/point")
+    public ApiResponse<ClubPointTotalResponse> getMyTotalPoint() {
         return ApiResponse.<ClubPointTotalResponse>builder()
                 .success(true)
-                .data(clubPointService.getClubMemberPointById(clubMemberId))
+                .data(clubPointService.getClubMemberPointById())
                 .build();
     }
 
     @Operation(summary = "Lấy danh sách lịch sử cộng / trừ điểm")
-    @GetMapping("/history/point/{clubMemberId}")
-    public ApiResponse<List<ClubPointHistoryResponse>> getMyHistoryPoint(@PathVariable String clubMemberId) {
+    @GetMapping("/history/point")
+    public ApiResponse<List<ClubPointHistoryResponse>> getMyHistoryPoint() {
         return ApiResponse.<List<ClubPointHistoryResponse>>builder()
                 .success(true)
-                .data(clubPointService.getHistoryPoint(clubMemberId))
+                .data(clubPointService.getHistoryPoint())
                 .build();
     }
 
