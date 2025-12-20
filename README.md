@@ -1,4 +1,4 @@
-# backend
+# University Spring Tech Club Backend
 
 ### Start & setup MySQL on docker
 
